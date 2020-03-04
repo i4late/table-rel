@@ -24,7 +24,7 @@ public class Neo4jDataController {
     @Autowired
     private Neo4jHandlerService neo4jHandlerService;
 
-    @PostMapping("/findTables")
+    @PostMapping("/findTables/v1")
     @ApiOperation("根据表名称查询关系")
     public String findTables(@RequestBody Map requestParams) {
         String sourceDb = requestParams.get("sourceDb").toString();
