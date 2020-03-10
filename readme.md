@@ -19,7 +19,6 @@ http://127.0.0.1:8080/neo4j/saveTableRels/v1
 "sourceDb":"test",
 "sourceTableCode":"user",
 "sourceTableBus":"税务",
-"sourceTableCol":"id",
 "rels":[{"name":"用户表",
          "db":"test",
          "code":"user",

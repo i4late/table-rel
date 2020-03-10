@@ -71,7 +71,6 @@ public class Neo4jDataController {
         String sourceDb = requestParams.get("sourceDb").toString();
         String sourceTableCode = requestParams.get("sourceTableCode").toString();
         String sourceTableBus = requestParams.get("sourceTableBus").toString();
-        String sourceTableCol = requestParams.get("sourceTableCol").toString();
 
         List<TableColGraph> list = (List<TableColGraph>) JSONArray.parseArray(JSONArray.toJSONString(requestParams.get("rels")), TableColGraph.class);
 
