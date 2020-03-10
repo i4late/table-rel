@@ -13,6 +13,25 @@ CREATE CONSTRAINT ON(n:TABLE)ASSERT n.fullCode IS UNIQUE;
 ##测试数据
 postman 测试,使用 row 模式 json数据格式 的方式
 
+http://127.0.0.1:8080/neo4j/saveTableRels/v1
+{
+"sourceTableName":"用户表",
+"sourceDb":"test",
+"sourceTableCode":"user",
+"sourceTableBus":"税务",
+"sourceTableCol":"id",
+"rels":[{"name":"用户表",
+         "db":"test",
+         "code":"user",
+         "business":"税务",
+         "col":"id"},
+         {"name":"用户表",
+           "db":"test",
+           "code":"user",
+           "business":"税务",
+           "col":"id"}]
+}
+
 
 http://127.0.0.1:8080/neo4j/saveTableRel/v1
 {

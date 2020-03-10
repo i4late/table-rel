@@ -1,15 +1,20 @@
 package com.neo4j.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.neo4j.entity.TableColGraph;
 import com.neo4j.entity.TableGraph;
 import com.neo4j.entity.TableRelationship;
+import com.neo4j.service.Neo4jHandlerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import com.neo4j.service.Neo4jHandlerService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -59,5 +64,28 @@ public class Neo4jDataController {
         neo4jHandlerService.saveTableRelationship(relationship);
     }
 
+    @PostMapping("/saveTableRels/v1")
+    @ApiOperation("保存多个表关系")
+    public void saveTableRels(@RequestBody Map requestParams) {
+        String sourceTableName = requestParams.get("sourceTableName").toString();
+        String sourceDb = requestParams.get("sourceDb").toString();
+        String sourceTableCode = requestParams.get("sourceTableCode").toString();
+        String sourceTableBus = requestParams.get("sourceTableBus").toString();
+        String sourceTableCol = requestParams.get("sourceTableCol").toString();
 
+        List<TableColGraph> list = (List<TableColGraph>) JSONArray.parseArray(JSONArray.toJSONString(requestParams.get("rels")), TableColGraph.class);
+
+        TableGraph sourceTable = new TableGraph(sourceDb, sourceTableCode, sourceTableName, sourceTableBus);
+
+        for (TableColGraph target : list) {
+            TableGraph targetTable = new TableGraph(target.getDb(), target.getCode(), target.getName(), target.getBusiness());
+            TableRelationship relationship = new TableRelationship();
+            relationship.setStartTable(sourceTable);
+            relationship.setEndTable(targetTable);
+            relationship.setSource(sourceTableCol);
+            relationship.setTarget(target.getCol());
+            neo4jHandlerService.saveTableRelationship(relationship);
+        }
+
+    }
 }
