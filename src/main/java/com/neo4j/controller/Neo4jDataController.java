@@ -82,7 +82,7 @@ public class Neo4jDataController {
             TableRelationship relationship = new TableRelationship();
             relationship.setStartTable(sourceTable);
             relationship.setEndTable(targetTable);
-            relationship.setSource(sourceTableCol);
+            relationship.setSource(target.getSourceCol());
             relationship.setTarget(target.getCol());
             neo4jHandlerService.saveTableRelationship(relationship);
         }

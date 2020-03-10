@@ -24,12 +24,14 @@ http://127.0.0.1:8080/neo4j/saveTableRels/v1
          "db":"test",
          "code":"user",
          "business":"税务",
-         "col":"id"},
+         "col":"id",
+         "sourceCol":"ids"},
          {"name":"用户表",
            "db":"test",
            "code":"user",
            "business":"税务",
-           "col":"id"}]
+           "col":"id",
+           "sourceCol":"oid"}]
 }
 
 

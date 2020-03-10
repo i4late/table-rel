@@ -9,8 +9,16 @@ public class TableColGraph {
     public String business;
     public String fullCode;
     public String col;
+    public String sourceCol;
 
 
+    public String getSourceCol() {
+        return sourceCol;
+    }
+
+    public void setSourceCol(String sourceCol) {
+        this.sourceCol = sourceCol;
+    }
 
     public String getCol() {
         return col;
