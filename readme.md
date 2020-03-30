@@ -64,6 +64,9 @@ http://127.0.0.1:8080/neo4j/saveTableRels/v2
            "tname":"中文"
            }]
 }
+#### 新增 /findTables/v2
+返回多增加 字段名称,关联关系等字段.
+
 
 http://127.0.0.1:8080/neo4j/findTables/v1
 {
