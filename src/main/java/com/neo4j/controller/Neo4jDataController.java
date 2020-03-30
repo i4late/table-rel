@@ -37,7 +37,14 @@ public class Neo4jDataController {
         List<Map<String, Object>> tables = neo4jHandlerService.findTables(sourceDb, sourceTableCode);
         return JSON.toJSONString(tables);
     }
-
+    @PostMapping("/findTables/v2")
+    @ApiOperation("根据表名称查询关系")
+    public String findTablesWithTagName(@RequestBody Map requestParams) {
+        String sourceDb = requestParams.get("sourceDb").toString();
+        String sourceTableCode = requestParams.get("sourceTableCode").toString();
+        List<Map<String, Object>> tables = neo4jHandlerService.findTables(sourceDb, sourceTableCode);
+        return JSON.toJSONString(tables);
+    }
     @PostMapping("/saveTableRel/v1")
     @ApiOperation("保存表关系")
     public void saveTableRel(@RequestBody Map requestParams) {

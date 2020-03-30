@@ -11,7 +11,7 @@ public interface Neo4jTableRepository extends Neo4jRepository<TableGraph, Long> 
     @Query("MATCH (m:TABLE) where m.fullCode={fullCode} RETURN m")
     TableGraph getTable(@Param("fullCode") String fullCode);
 
-    @Query("MATCH (a:TABLE)-[r]-(b:TABLE) WHERE a.fullCode={fullCode} return a.db,a.code,a.name,r.source,b.db,b.code,b.name,r.target ")
+    @Query("MATCH (a:TABLE)-[r]-(b:TABLE) WHERE a.fullCode={fullCode} return a.db,a.code,a.name,r.source,r.sname,r.stag,b.db,b.code,b.name,r.target,r.tname,r.ttag ")
     Iterable<Map<String, Object>> findTables(@Param("fullCode") String fullCode);
 
 }
