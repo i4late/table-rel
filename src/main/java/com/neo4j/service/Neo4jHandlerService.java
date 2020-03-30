@@ -13,5 +13,7 @@ public interface Neo4jHandlerService {
 
     String saveTableRelationship(TableRelationship tablerel);
 
+    String saveTableRelationshipWithNameTag(TableRelationship tablerel);
+
     List<Map<String, Object>> findTables(String db, String code);
 }

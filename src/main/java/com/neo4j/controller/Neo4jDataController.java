@@ -2,7 +2,7 @@ package com.neo4j.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.neo4j.entity.TableColGraph;
+import com.neo4j.entity.TableColGraphVo;
 import com.neo4j.entity.TableGraph;
 import com.neo4j.entity.TableRelationship;
 import com.neo4j.service.Neo4jHandlerService;
@@ -72,17 +72,44 @@ public class Neo4jDataController {
         String sourceTableCode = requestParams.get("sourceTableCode").toString();
         String sourceTableBus = requestParams.get("sourceTableBus").toString();
 
-        List<TableColGraph> list = (List<TableColGraph>) JSONArray.parseArray(JSONArray.toJSONString(requestParams.get("rels")), TableColGraph.class);
+        List<TableColGraphVo> list = (List<TableColGraphVo>) JSONArray.parseArray(JSONArray.toJSONString(requestParams.get("rels")), TableColGraphVo.class);
 
         TableGraph sourceTable = new TableGraph(sourceDb, sourceTableCode, sourceTableName, sourceTableBus);
 
-        for (TableColGraph target : list) {
+        for (TableColGraphVo target : list) {
             TableGraph targetTable = new TableGraph(target.getDb(), target.getCode(), target.getName(), target.getBusiness());
             TableRelationship relationship = new TableRelationship();
             relationship.setStartTable(sourceTable);
             relationship.setEndTable(targetTable);
             relationship.setSource(target.getSourceCol());
             relationship.setTarget(target.getCol());
+            neo4jHandlerService.saveTableRelationship(relationship);
+        }
+
+    }
+    @PostMapping("/saveTableRels/v2")
+    @ApiOperation("保存多个表关系")
+    public void saveTableRelsWithTagName(@RequestBody Map requestParams) {
+        String sourceTableName = requestParams.get("sourceTableName").toString();
+        String sourceDb = requestParams.get("sourceDb").toString();
+        String sourceTableCode = requestParams.get("sourceTableCode").toString();
+        String sourceTableBus = requestParams.get("sourceTableBus").toString();
+
+        List<TableColGraphVo> list = (List<TableColGraphVo>) JSONArray.parseArray(JSONArray.toJSONString(requestParams.get("rels")), TableColGraphVo.class);
+
+        TableGraph sourceTable = new TableGraph(sourceDb, sourceTableCode, sourceTableName, sourceTableBus);
+
+        for (TableColGraphVo target : list) {
+            TableGraph targetTable = new TableGraph(target.getDb(), target.getCode(), target.getName(), target.getBusiness());
+            TableRelationship relationship = new TableRelationship();
+            relationship.setStartTable(sourceTable);
+            relationship.setEndTable(targetTable);
+            relationship.setSource(target.getSourceCol());
+            relationship.setSname(target.getSname());//字段中文名
+            relationship.setStag(target.getStag()); //标注1对多,多对多
+            relationship.setTarget(target.getCol());
+            relationship.setTname(target.getTname());
+            relationship.setTtag(target.getTtag());
             neo4jHandlerService.saveTableRelationship(relationship);
         }
 

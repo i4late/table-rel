@@ -43,7 +43,14 @@ public class Neo4jHandlerServiceImpl implements Neo4jHandlerService {
         String relation = neo4jRelationshipRepository.saveRel(startGraph.getId(), endGraph.getId(), tablerel.getSource(), tablerel.getTarget());
         return relation;
     }
-
+    @Override
+    public String saveTableRelationshipWithNameTag(TableRelationship tablerel) {
+        TableGraph startGraph = saveNeo4jTable(tablerel.getStartTable());
+        TableGraph endGraph = saveNeo4jTable(tablerel.getEndTable());
+        String relation = neo4jRelationshipRepository.saveRelNameWithTag(startGraph.getId(), endGraph.getId(),
+                tablerel.getSource(), tablerel.getTarget(),tablerel.getStag(),tablerel.getTtag(),tablerel.getSname(),tablerel.getTname());
+        return relation;
+    }
     @Override
     public List<Map<String, Object>> findTables(String db, String code) {
         ArrayList<Map<String, Object>> relsTmp = Lists.newArrayList(neo4jTableRepository.findTables(db + "." + code));

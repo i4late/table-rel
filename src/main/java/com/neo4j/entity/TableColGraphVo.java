@@ -1,6 +1,6 @@
 package com.neo4j.entity;
 
-public class TableColGraph {
+public class TableColGraphVo {
 
 
     public String db;
@@ -8,8 +8,12 @@ public class TableColGraph {
     public String name;
     public String business;
     public String fullCode;
-    public String col;
-    public String sourceCol;
+    public String col;//目标字段
+    public String sourceCol; //源字段
+    private String stag; //源对应关系
+    private String ttag; //目标对应关系
+    private String sname;//源字段名
+    private String tname;//目标字段名
 
 
     public String getSourceCol() {
@@ -36,6 +40,37 @@ public class TableColGraph {
         this.fullCode = fullCode;
     }
 
+    public String getStag() {
+        return stag;
+    }
+
+    public void setStag(String stag) {
+        this.stag = stag;
+    }
+
+    public String getTtag() {
+        return ttag;
+    }
+
+    public void setTtag(String ttag) {
+        this.ttag = ttag;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
+    public String getTname() {
+        return tname;
+    }
+
+    public void setTname(String tname) {
+        this.tname = tname;
+    }
 
     public String getDb() {
         return db;

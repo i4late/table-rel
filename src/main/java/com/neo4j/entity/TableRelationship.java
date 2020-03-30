@@ -11,6 +11,10 @@ public class TableRelationship {
 
     private String source;
     private String target;
+    private String stag;
+    private String ttag;
+    private String sname;
+    private String tname;
 
     @StartNode
     private TableGraph startTable;
@@ -23,6 +27,38 @@ public class TableRelationship {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getStag() {
+        return stag;
+    }
+
+    public void setStag(String stag) {
+        this.stag = stag;
+    }
+
+    public String getTtag() {
+        return ttag;
+    }
+
+    public void setTtag(String ttag) {
+        this.ttag = ttag;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
+    public String getTname() {
+        return tname;
+    }
+
+    public void setTname(String tname) {
+        this.tname = tname;
     }
 
     public String getSource() {

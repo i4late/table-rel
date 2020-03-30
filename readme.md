@@ -33,19 +33,36 @@ http://127.0.0.1:8080/neo4j/saveTableRels/v1
            "sourceCol":"oid"}]
 }
 
+###新增 字段名称,和 表对应关系1-*, *-*, 1-1 三种
 
-http://127.0.0.1:8080/neo4j/saveTableRel/v1
+http://127.0.0.1:8080/neo4j/saveTableRels/v2
 {
 "sourceTableName":"用户表",
-"targetTableName":"部门表",
 "sourceDb":"test",
- "targetDb":"test",
 "sourceTableCode":"user",
- "targetTableCode":"dept",
 "sourceTableBus":"税务",
- "targetTableBus":"税务",
-"sourceTableCol":"id",
- "targetTableCol":"userid"
+"rels":[{"name":"用户表",
+         "db":"test",
+         "code":"user",
+         "business":"税务",
+         "col":"id",
+         "sourceCol":"ids",
+         "stag":"1",
+         "ttag":"*",
+         "sname":"中文",
+         "tname":"中文"
+         },
+         {"name":"用户表",
+           "db":"test",
+           "code":"user",
+           "business":"税务",
+           "col":"id",
+           "sourceCol":"oid",
+           "stag":"1",
+           "ttag":"1",
+           "sname":"中文",
+           "tname":"中文"
+           }]
 }
 
 http://127.0.0.1:8080/neo4j/findTables/v1
